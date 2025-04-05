@@ -16,7 +16,8 @@ jobs:
       matrix:
         repo:
 #         - {github: "",  bitbucket: "", codeberg: "",  gitlab: "" }
-          - {github: "https://github.com/ZXCmod/.github.git",  bitbucket: "git@bitbucket.org:zxcmod/.github.git", codeberg: "git@codeberg.org:ZXC-mod/.github.git", gitlab: "git@gitlab.com:zxcmod/dot-github.git"}
+          - {github: "https://github.com/ZXCmod/.github.git",  bitbucket: "git@bitbucket.org:zxcmod/.github.git", codeberg: "git@codeberg.org:ZXCmod/.github.git", gitlab: "git@gitlab.com:zxcmod/dot-github.git"}
+          - {github: "https://github.com/ZXCmod/ZXCmod.git",  bitbucket: "git@bitbucket.org:zxcmod/ZXCmod.git", codeberg: "git@codeberg.org:ZXCmod/ZXCmod.git", gitlab: "git@gitlab.com:zxcmod/ZXCmod.git"}
 
     steps:
       - name: Set up SSH key

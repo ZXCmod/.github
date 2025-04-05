@@ -12,7 +12,6 @@ on:
           - ZXCmod/.github
           # Projects
           - ZXCmod/ZXCmod
-          - ZXCmod/ZXCmod-info
 jobs:
   sync:
     name: Sync ${{ inputs.repo }} labels
