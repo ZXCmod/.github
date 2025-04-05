@@ -15,7 +15,8 @@ jobs:
     strategy:
       matrix:
         repo:
-          - {github: "https://github.com/ZXCmod/.github.git",  bitbucket: "git@bitbucket.org:zxcmod/.github.git" ,  gitlab: "git@gitlab.com:zxcmod/dot-github.git" }
+#         - {github: "",  bitbucket: "", codeberg: "",  gitlab: "" }
+          - {github: "https://github.com/ZXCmod/.github.git",  bitbucket: "git@bitbucket.org:zxcmod/.github.git", codeberg: "git@codeberg.org:ZXC-mod/.github.git", gitlab: "git@gitlab.com:zxcmod/dot-github.git"}
 
     steps:
       - name: Set up SSH key
@@ -25,9 +26,10 @@ jobs:
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -t rsa,ed25519 bitbucket.org >> ~/.ssh/known_hosts
+          ssh-keyscan -t rsa,ed25519 codeberg.org >> ~/.ssh/known_hosts
           ssh-keyscan -t rsa,ed25519 github.com >> ~/.ssh/known_hosts
           ssh-keyscan -t rsa,ed25519 gitlab.com >> ~/.ssh/known_hosts
-          ssh-keyscan -t rsa,ed25519 bitbucket.org >> ~/.ssh/known_hosts
 
       - name: Clone repository as mirror
         run: |
@@ -37,6 +39,12 @@ jobs:
         run: |
           cd repo-mirror
           git remote set-url origin ${{ matrix.repo.bitbucket }}
+          git push --mirror --force
+
+      - name: Push to CodeBerg
+        run: |
+          cd repo-mirror
+          git remote set-url origin ${{ matrix.repo.codeberg }}
           git push --mirror --force
 
       - name: Push to GitLab
